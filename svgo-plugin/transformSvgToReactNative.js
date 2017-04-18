@@ -1,5 +1,7 @@
 'use strict';
 
+const services = require('../lib/services/services.js');
+
 exports.type = 'perItem';
 
 exports.active = false;
@@ -16,11 +18,8 @@ exports.description = 'convert result item to React Native SVG component';
  * <Svg width="100 height="100"> <Path d="..."/></Svg>
  */
 exports.fn = (item) => {
-  if (item.isElem('svg')) {
-    item.renameElem('Svg');
+  if (item.length > 1) {
+    return services.stringToPascalCase(item);
   }
-
-  if (item.isElem('path')) {
-    item.renameElem('Path');
-  }
+  return item;
 };
